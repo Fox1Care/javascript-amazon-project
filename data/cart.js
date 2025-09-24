@@ -1,14 +1,4 @@
-export let cart = JSON.parse(localStorage.getItem('cart')) 
-if(cart.length  === 0) {
-  cart = 
-[{
-  productId: 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6',
-  quantity: 2,
-}, {
-  productId: '15b6fc6f-327a-4ec4-896f-486349e85a3d',
-  quantity: 1,
-}];
-}
+export let cart = JSON.parse(localStorage.getItem('cart'))
 
 function saveToStorage() {
   localStorage.setItem('cart', JSON.stringify(cart));
@@ -50,4 +40,32 @@ cart = newCart;
 console.log(cart);
 
 saveToStorage();
+}
+
+export function editCartItemQuantity(productId, newQuantity) {
+  cart.forEach( (cartItem) => {
+      if (cartItem.productId === productId) {
+        cartItem.quantity = +newQuantity;
+      }
+  })
+  saveToStorage();
+}
+
+export function calculateCartQuantity() {
+  let cartQuantity = 0;
+
+  cart.forEach( (cartItem) => {
+    cartQuantity += cartItem.quantity;
+  })
+  return cartQuantity;
+}
+
+export function updateCartQuantity(className, optionalText = '') {
+  const cartQuantity = calculateCartQuantity();
+
+  const element = document.querySelector(`.${className}`);
+
+  if (element) {
+    element.textContent = `${cartQuantity} ${optionalText}`
+  }
 }
