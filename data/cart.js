@@ -1,13 +1,5 @@
 export let cart = JSON.parse(localStorage.getItem('cart'))
 
-if (!cart || cart.length === 0) {
-  cart = [{
-    productId: 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6',
-    quantity: 2,
-    deliveryOptionId: '2',
-  }]
-}
-
 export function addToCart(productId) {
   let matchingItem;
   const selectObject = document.querySelector(`.js-select-quantity-${productId}`);
@@ -39,7 +31,6 @@ export function removeFromCart(productId) {
         newCart.push(cartItem);
       }
   });
-
 cart = newCart;
 
 saveToStorage();
