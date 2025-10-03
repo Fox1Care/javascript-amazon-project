@@ -1,3 +1,5 @@
+import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js';
+
 export const deliveryOptions = 
 [
   {
@@ -26,4 +28,29 @@ export function getDeliveryOption(deliveryOptionId) {
     }
   });
   return deliveryOption || deliveryOptions[0];
+}
+
+function isWeekend(date) {
+  const weekDay = date.format('dddd');
+  return weekDay === 'Saturday' || weekDay === 'Sunday';
+}
+
+export function calculateDeliveryDate(deliveryOptionId) {
+  const deliveryOption = getDeliveryOption(deliveryOptionId);
+
+  const today = dayjs();
+
+  let remainingDays = deliveryOption.deliveryDays;
+
+  let deliveryDate = dayjs();
+
+  while (remainingDays > 0) {
+    deliveryDate = deliveryDate.add(1,'days');
+    if (!isWeekend(deliveryDate))
+      remainingDays--;
+  }
+    
+  const dateString = deliveryDate.format('dddd, MMMM D');
+
+  return dateString;
 }
