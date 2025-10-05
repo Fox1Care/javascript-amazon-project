@@ -28,6 +28,6 @@ export default function renderCheckoutHeader() {
     </div>
   `
 
-  document.querySelector('.checkout-header')
+  document.querySelector('.js-checkout-header')
     .innerHTML = checkoutHTML;
 }

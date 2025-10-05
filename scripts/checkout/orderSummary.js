@@ -8,7 +8,6 @@ import renderCheckoutHeader from './checkoutHeader.js';
 export function renderOrderSummary() {
 
 let cartSummaryHTML = '';
-
 cart.forEach( (cartItem) => {
   const productId = cartItem.productId;
 
@@ -20,7 +19,9 @@ cart.forEach( (cartItem) => {
 
   cartSummaryHTML +=
   `
-    <div class="cart-item-container js-cart-item-container-${productId}">
+    <div class="cart-item-container 
+    js-cart-item-container
+    js-cart-item-container-${productId}">
       <div class="delivery-date">
         Delivery date: ${dateString}
       </div>
@@ -36,7 +37,8 @@ cart.forEach( (cartItem) => {
           <div class="product-price">
             $${formatCurrency(matchingProduct.priceCents)}
           </div>
-          <div class="product-quantity">
+          <div class="product-quantity 
+          js-product-quantity-${productId}">
             <span>
               Quantity: <span class="quantity-label"
               data-product-id="${productId}">${cartItem.quantity}</span>

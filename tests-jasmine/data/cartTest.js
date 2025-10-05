@@ -10,7 +10,6 @@ describe('test suite: addToCart', () => {
         deliveryOptionId: '1',
       }]);
     });
-    console.log(localStorage.getItem('cart'));
     loadFromStorage();
 
     addToCart('3ebe75dc-64d2-4137-8860-1f5a963e534b', 1);
