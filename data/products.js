@@ -5,6 +5,11 @@ export function getProduct(productId) {
     if (product.id === productId)
       matchingProduct = product;
   });
+
+  if(!matchingProduct) {
+    return;
+  }
+
   return matchingProduct;
 }
 

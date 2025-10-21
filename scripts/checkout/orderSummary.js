@@ -1,7 +1,7 @@
 import { cart, removeFromCart, editCartItemQuantity, updateDeliveryOption } from '../../data/cart.js';
 import { getProduct } from '../../data/products.js';
 import formatCurrency from '../../utils/money.js';
-import { deliveryOptions, calculateDeliveryDate } from '../../data/deliveryOptions.js'
+import { deliveryOptions, calculateDeliveryDate, getDeliveryOption } from '../../data/deliveryOptions.js'
 import { renderPaymentSummary } from './paymentSummary.js';
 import renderCheckoutHeader from './checkoutHeader.js';
 
@@ -31,10 +31,14 @@ cart.forEach( (cartItem) => {
           src="${matchingProduct.image}">
 
         <div class="cart-item-details">
-          <div class="product-name">
+          <div class="product-name 
+          js-product-name"
+          data-product-id="${productId}">
             ${matchingProduct.name}
           </div>
-          <div class="product-price">
+          <div class="product-price
+          js-product-price"
+          data-product-id="${productId}">
             $${formatCurrency(matchingProduct.priceCents)}
           </div>
           <div class="product-quantity 
@@ -87,7 +91,8 @@ function deliveryOptionsHTML(productId, cartItem) {
       data-delivery-option-id="${deliveryOption.id}">
         <input type="radio" 
           ${isChecked ? 'checked' : ''}
-          class="delivery-option-input"
+          class="delivery-option-input
+          js-delivery-option-input"
           name="delivery-option-${productId}">
         <div>
           <div class="delivery-option-date">
