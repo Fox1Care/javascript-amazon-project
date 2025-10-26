@@ -1,5 +1,5 @@
 import { cart, addToCart, loadFromStorage, removeFromCart, updateDeliveryOption } from '../../data/cart.js';
-
+// Rewrite tests for cart class instead of original cart.
 describe('test suite: addToCart', () => {
   beforeEach(() => {
     spyOn(localStorage.__proto__, 'setItem');
