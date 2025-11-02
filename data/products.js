@@ -8,20 +8,14 @@ export function getProduct(productId) {
       matchingProduct = product;
   });
 
-  if(!matchingProduct) {
+  if (!matchingProduct) {
     return;
   }
 
   return matchingProduct;
 }
 
-class Product {
-  id;
-  image;
-  name;
-  rating;
-  priceCents;
-
+export class Product {
   constructor(productDetails) {
     {
       this.id = productDetails.id;
@@ -44,8 +38,7 @@ class Product {
   }
 }
 
-class Clothing extends Product {
-  sizeChartLink;
+export class Clothing extends Product {
 
   constructor(productDetails) {
     super(productDetails);
@@ -54,12 +47,22 @@ class Clothing extends Product {
 
   extraInfoHTML() {
     // super.extraInfoHTML(); super - parent class.
-    return `
-      <a href="${this.sizeChartLink}" target="_blank">Size Chart</a>
-    `;
+    return `<a href="${this.sizeChartLink}" target="_blank">Size Chart</a>`;
   }
 }
 
+export class Appliance extends Product {
+  constructor(productDetails) {
+    super(productDetails);
+    this.instructionsLink = productDetails.instructionsLink;
+    this.warrantyLink = productDetails.warrantyLink;
+  }
+  extraInfoHTML() {
+    return `<a href="${this.instructionsLink}" target="_blank">Instructions</a>
+    <a href="${this.warrantyLink}" target="_blank">Warranty</a>`
+  }
+
+}
 
 /*
 const date = new Date();
@@ -67,11 +70,11 @@ console.log(date);
 console.log(date.toLocaleTimeString());
 */
 
-console.log(this);
+// console.log(this);
 
 // const object2 = {
 //   a: 2,
-//   b: this.a, // tries to go outside but cant  any reference and gives undefined.
+//   b: this.a, // tries to go outside but cant find any reference and gives undefined.
 // };
 
 /*
@@ -149,7 +152,10 @@ export const products = [
       "toaster",
       "kitchen",
       "appliances"
-    ]
+    ],
+    type: "appliances",
+    instructionsLink: "images/appliance-instructions.png",
+    warrantyLink: "images/appliance-warranty.png",
   },
   {
     id: "3ebe75dc-64d2-4137-8860-1f5a963e534b",
@@ -749,8 +755,11 @@ export const products = [
     ]
   }
 ].map((productDetails) => {
-  if (productDetails.type === 'clothing') {
+  if (productDetails.type === 'clothing')  {
     return new Clothing(productDetails);
+  }
+  if (productDetails.type === 'appliances' || productDetails.keywords.includes('appliances')) { 
+    return new Appliance(productDetails);
   }
   return new Product(productDetails);
 });
