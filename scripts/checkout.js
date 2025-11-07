@@ -26,9 +26,6 @@ async function loadPage() {
     console.log('Unexpected error. Please try again later.');
   }
   
-
-  
-
   renderCheckoutHeader();
   renderOrderSummary();
   renderPaymentSummary();
