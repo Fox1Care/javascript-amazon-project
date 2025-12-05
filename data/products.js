@@ -131,7 +131,7 @@ export function loadProducts(fun) {
 
   xhr.addEventListener('load', () => {
     products = JSON.parse(xhr.response).map((productDetails) => {
-  if (productDetails.type === 'clothing')  {
+  if (productDetails.type === 'clothing') {
     return new Clothing(productDetails);
   }
   if (productDetails.type === 'appliances' || productDetails.keywords.includes('appliances')) { 

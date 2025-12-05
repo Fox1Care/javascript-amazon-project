@@ -1,4 +1,4 @@
-import { loadFromStorage, cart } from "../../data/cart.js";
+import { loadFromStorage, cart, loadCartFetch } from "../../data/cart.js";
 import { renderOrderSummary } from "../../scripts/checkout/orderSummary.js";
 import { loadProducts, loadProductsFetch } from "../../data/products.js";
 describe('test suite: renderSummary', () => {
@@ -7,11 +7,11 @@ describe('test suite: renderSummary', () => {
   const productName1 = 'Black and Gray Athletic Cotton Socks - 6 Pairs';
   const productName2 = 'Intermediate Size Basketball';
 
-  beforeAll((done) => {
-    loadProductsFetch().then(() => {
-      done();
-    });
+  beforeAll(async () => {
+    await loadProductsFetch();
+    await loadCartFetch();
   })
+  
 
   beforeEach(() => {
     spyOn(localStorage.__proto__, 'setItem');

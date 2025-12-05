@@ -1,4 +1,4 @@
-class Cart {
+export class Cart {
   cartItems;
   #localStorageKey;
 
@@ -107,7 +107,7 @@ class Cart {
     };
 
     updateCartQuantity(className, optionalText = '') {
-      const cartQuantity = calculateCartQuantity();
+      const cartQuantity = this.calculateCartQuantity();
 
       const element = document.querySelector(`.${className}`);
 
