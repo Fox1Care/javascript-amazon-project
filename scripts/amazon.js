@@ -1,13 +1,38 @@
 import * as cartModule from "../data/cart.js";
-import { products, loadProducts } from "../data/products.js";
+import { products, loadProductsFetch } from "../data/products.js";
+import { renderHeader } from "./amazon/header.js";
 
-loadProducts(renderProductsGrid);
 
-function renderProductsGrid() {
+await Promise.all([
+  loadProductsFetch(),
+]);
+renderHeader();
+renderProductsGrid();
+
+
+export function renderProductsGrid() {
   let productsHTML = '';
+  let newProducts = [];
 
-  products.forEach( (product) => {
-    productsHTML += `
+  const searchValue = new URLSearchParams(window.location.search).get('search');
+
+  if (searchValue) {
+    products.forEach((product) => {
+      console.log(product);
+      const productName = (product.name).toLowerCase();
+      const productKeywords = product.keywords;
+          if (productName.includes(searchValue.toLowerCase()) || productKeywords.includes(searchValue)) {
+            newProducts.push(product);        
+        }
+    });
+  }
+  else {
+    newProducts = products;
+  }
+  
+
+  newProducts.forEach(product => {
+      productsHTML += `
     <div class="product-container">
       <div class="product-image-container">
         <img class="product-image"
@@ -61,7 +86,7 @@ function renderProductsGrid() {
       </button>
     </div>
     `; 
-  });
+    });
 
   document.querySelector('.js-products-grid')
     .innerHTML = productsHTML;
