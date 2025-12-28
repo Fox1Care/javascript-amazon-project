@@ -61,7 +61,6 @@ export async function renderTrackingPage() {
   const deliveryTime = dayjs(isWeekend(matchingOrderItem.estimatedDeliveryTime, matchingOrder.orderTime));
 
   const progressDelivery = ((currentTime - orderTime) / (deliveryTime - orderTime)) * 100;
-  console.log(progressDelivery);
   
   document.querySelector('.order-tracking').innerHTML += trackingHTML;
 

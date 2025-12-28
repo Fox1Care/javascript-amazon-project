@@ -14,11 +14,10 @@ async function loadPage() {
     // throw 'error1';
     await Promise.all([
       loadProductsFetch(),
-      loadCartFetch(),
   ]);
 
   } catch (error) {
-    console.log('Unexpected error. Please try again later.');
+    console.log(`Error: ${error}.`);
   }
   renderCheckoutHeader();
   renderOrderSummary();
