@@ -3,9 +3,11 @@ import { orders } from '../../data/orders.js';
 import { getProduct, loadProductsFetch } from '../../data/products.js';
 import { formatDate, isWeekend } from '../../utils/date.js';
 import formatCurrency from '../../utils/money.js';
+import { renderHeader } from '../amazon/header.js';
 
 export async function renderOrdersSummary() {
   await loadProductsFetch();
+  renderHeader();
 
   let ordersSummaryHTML = '';
 

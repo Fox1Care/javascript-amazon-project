@@ -2,9 +2,12 @@ import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js';
 import { getOrder } from "../../data/orders.js";
 import { loadProductsFetch, getProduct } from '../../data/products.js';
 import { formatDate, isWeekend } from '../../utils/date.js'
+import { renderHeader } from '../amazon/header.js';
 
 export async function renderTrackingPage() {
   await loadProductsFetch();
+  renderHeader();
+  
   let trackingHTML;
 
   const orderId = new URLSearchParams(window.location.search).get('orderId');

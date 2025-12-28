@@ -1,3 +1,5 @@
+import { updateCartQuantity } from '../../data/cart.js' 
+
 export function renderHeader() {
 
   let headerHTML = `
@@ -32,6 +34,8 @@ export function renderHeader() {
       </div>
   `
   document.querySelector('.js-amazon-header').innerHTML = headerHTML;
+
+  updateCartQuantity('js-cart-quantity');
 
   document.querySelector('.js-search-btn').addEventListener('click', () => {
     const searchInput = document.querySelector('.js-search-bar');

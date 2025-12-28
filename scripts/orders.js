@@ -1,7 +1,4 @@
-import { updateCartQuantity } from '../data/cart.js';
 import { renderOrdersSummary } from './orders/ordersSummary.js';
-
-updateCartQuantity('js-cart-quantity');
 
 async function loadPage() {
   try {

@@ -2,13 +2,12 @@ import * as cartModule from "../data/cart.js";
 import { products, loadProductsFetch } from "../data/products.js";
 import { renderHeader } from "./amazon/header.js";
 
-
 await Promise.all([
   loadProductsFetch(),
 ]);
+
 renderHeader();
 renderProductsGrid();
-
 
 export function renderProductsGrid() {
   let productsHTML = '';
@@ -21,7 +20,8 @@ export function renderProductsGrid() {
       console.log(product);
       const productName = (product.name).toLowerCase();
       const productKeywords = product.keywords;
-          if (productName.includes(searchValue.toLowerCase()) || productKeywords.includes(searchValue)) {
+          if (productName.includes(searchValue.toLowerCase()) 
+            || productKeywords.includes(searchValue)) {
             newProducts.push(product);        
         }
     });
@@ -29,7 +29,6 @@ export function renderProductsGrid() {
   else {
     newProducts = products;
   }
-  
 
   newProducts.forEach(product => {
       productsHTML += `
@@ -91,8 +90,6 @@ export function renderProductsGrid() {
   document.querySelector('.js-products-grid')
     .innerHTML = productsHTML;
 
-    cartModule.updateCartQuantity('js-cart-quantity');
-
   document.querySelectorAll('.js-add-to-cart').forEach( (btn) => {
     btn.addEventListener('click', () => {
       const productId = btn.dataset.productId;
@@ -101,4 +98,3 @@ export function renderProductsGrid() {
     });
   });
 } 
-
